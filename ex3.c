@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAX 4
+#define MAX 5
 
 typedef struct
 {
@@ -11,7 +11,16 @@ typedef struct
     int idade;
     float nota;
 } aluno;
-
+int pesquisaSeq(aluno alu[MAX],char valor[20])
+{
+    int i;
+    for(i=0; i<MAX; i++)
+    {
+        if(strcmp(alu[i].nome,valor)==0)
+                return i;
+    }
+return -1;//-1= nao encontrou;
+}
 void verAlunos(aluno alu[MAX])
 {
     int i;
@@ -65,8 +74,9 @@ void menu()
 }
 int main()
 {
-    aluno alu[MAX]= {{"Joao Salvador",10,16,16.2},{"Manuel Dias",10,16,9.5}, {"Carlos Pais",10,17,10.5},{"Andre Silva",10,15,17.1}};
+    aluno alu[MAX]= {{"Joao Salvador",10,16,16.2},{"Manuel Dias",10,16,9.5}, {"Carlos Pais",10,17,10.5},{"Andre Silva",10,15,17.1},{"Diogo Mendes",10,16,14.4}};
     int opc;
+    char nome[20];
     HANDLE hConsole;
     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     while (1)
@@ -81,6 +91,15 @@ int main()
             verAlunos(alu);
             break;
         case 2:
+            system("cls");
+            printf("Introduza um nome de aluno a procurar\n");
+            printf("Nome ==> ");
+            fflush(stdin);
+            gets(nome);
+            if(pesquisaSeq(alu,nome)== -1)
+                printf("\nNome %s NAO encontrado!!!", nome);
+            else
+                printf("\nNome %s encontrado!!!",alu[pesquisaSeq(alu,nome)].nome);
             break;
         case 3:
             maisNovo(alu);
@@ -97,4 +116,3 @@ int main()
     }
     return 0;
 }
-
