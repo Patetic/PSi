@@ -86,21 +86,13 @@ void GanhaMais(empregados xpto[MAX])
     printf("O empregado que ganha mais e %.f e chama-se %s %s",x,xpto[a].nomep,xpto[a].apelido);
 }
 
-int procura(empregados xpto[MAX], char departamento[], int c)
+int procura(empregados xpto[MAX], char departamento[])
 {
     int i;
-    for(i=0; i<=cont; i++)
+    for(i=0; i<MAX; i++)
     {
-        if(c=0)
-        {
-            strcmp(xpto[i].departam,departamento);
-            return i;
-        }
-        else
-        {
-            strcmp(xpto[i].nomep,departamento);
-            return i;
-        }
+        if(strcmp(xpto[i].departam,departamento)==0)
+                return i;
     }
     return -1;
 }
@@ -123,7 +115,6 @@ void ordenar(empregados xpto[MAX])
         }
     }
 }
-
 int main()
 {
     empregados xpto[MAX]= {{"Joao", "Salvador",20,"Rua Estrada Benfica","Tecnico de TI","Gesta De Computadores",4000},
@@ -161,10 +152,10 @@ int main()
             printf("Introduza o departamento que quer procurar:\n");
             fflush(stdin);
             gets(departamento);
-            if(procura(xpto,departamento,0)== -1)
+            if(procura(xpto,departamento)== -1)
                 printf("\nDepartamento %s NAO encontrado!!!", departamento);
             else
-                printf("\nDepartamento %s encontrado e o nome do empregado que trabalha nele e: %s %s!!!",xpto[procura(xpto,departamento,0)].departam, xpto[procura(xpto,departamento,0)].nomep,xpto[procura(xpto,departamento,0)].apelido);
+                printf("\nDepartamento %s encontrado e o nome do empregado que trabalha nele e: %s %s!!!",xpto[procura(xpto,departamento)].departam, xpto[procura(xpto,departamento)].nomep,xpto[procura(xpto,departamento)].apelido);
             break;
         case 6:
             exit(0);
